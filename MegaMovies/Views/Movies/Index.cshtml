@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MegaMovies.Models.MovieModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<partial name="_Notification" />
+
+<h1>List of Movies</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> &nbsp; Add Movie</a>
+</p>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MovieTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Director)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReleaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoviePoster)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MovieTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Director)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">
+                    <img src="@FileLocation.RetriveFileFromFolder@item.MoviePoster" class="img-thumbnail" height="100" width="100" asp-append-version="true" />
+                </a>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i>Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary mx-2"><i class="bi bi-list"></i>Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary mx-2"><i class="bi bi-trash"></i>Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
